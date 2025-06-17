@@ -375,7 +375,7 @@ class PiRest(object):
                     "lon": location["lon"],
                     "x": location["x"],
                     "y": location["y"],
-                    "parametersNames": param_list
+                    "parameterNames": param_list
                 },
             )
 
