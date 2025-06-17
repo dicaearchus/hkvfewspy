@@ -364,6 +364,7 @@ class PiRest(object):
                 locId = location["locationId"].replace(".", "_")
 
             # set attributes of object with location items
+            param_list = [elem["value"] for elem in location["attributes"] if elem["name"]=="WNS"]
             setattr(
                 self.Locations.dict,
                 locId,
@@ -374,6 +375,7 @@ class PiRest(object):
                     "lon": location["lon"],
                     "x": location["x"],
                     "y": location["y"],
+                    "parametersNames": param_list
                 },
             )
 
