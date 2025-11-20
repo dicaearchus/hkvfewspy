@@ -358,7 +358,10 @@ class PiRest(object):
         locations = json_data.get("locations")
 
         for location in json_data.get("locations"):
-            locId = location["locationId"].replace(".", "_")
+            if location["locationId"][:1].isdigit():
+                locId = "L{0}".format(location["locationId"]).replace(".", "_")
+            else:
+                locId = location["locationId"].replace(".", "_")
 
             # set attributes of object with location items
             param_list = [elem["value"] for elem in location["attributes"] if elem["name"]=="WNS"]
