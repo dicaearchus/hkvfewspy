@@ -119,6 +119,23 @@ class PiRest(object):
         setattr(self, "TimeZoneId", response.text)
         return response.text
 
+    def getFlags(self):
+        """
+        get the explanation of the numbers for the flags
+
+        all the results of get*** functions are also written back in the class object without 'get'
+        (eg result of Pi.getFlags() is stored in Pi.Flags)
+        """
+
+        url = "{}flags".format(self.url)
+
+        response = requests.get(url,verify=self.verify)
+
+        json_data = json.loads(response.text)
+        df = pd.json_normalize(json_data['flags']).set_index('flag')
+        setattr(self, "Flags", df)
+
+
     def _addFilter(self, filter):
         """
         Add a filter to the collection
